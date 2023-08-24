@@ -1,6 +1,7 @@
 ---
 applications:
   - name: ((app_name))-((env)) # variables are inserted via cf push --vars-file ./deploy-config/staging.yml
+    # health-check-http-endpoint: /
     buildpack: nodejs_buildpack
     stack: cflinuxfs4
     instances: 1
@@ -16,7 +17,7 @@ applications:
       - type: web
         instances: ((web_instances))
         memory: ((web_memory))
-        command: ./scripts/run_web.sh # this will override a procfile, you must have one or the other
+        command: npm run start # ./scripts/run_web.sh # this will override a procfile, you must have one or the other
       # - type: worker
       #   instances: ((worker_instances))
       #   memory: ((worker_memory))
