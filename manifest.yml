@@ -16,7 +16,7 @@ applications:
       - type: web
         instances: ((web_instances))
         memory: ((web_memory))
-        command: ./scripts/run_web.sh # this will override a procfile, you must have one or the other
+        command: npm run start # ./scripts/run_web.sh
       # - type: worker
       #   instances: ((worker_instances))
       #   memory: ((worker_memory))
