@@ -30,6 +30,6 @@ applications:
       SANDBOX_API_BASE_URL: ((sandbox_api_base_url))
       MY_FIRST_ENV_VAR: ((MY_FIRST_ENV_VAR))
 
-      # eventually we'll need to deal with certs
+      # eventually we'll need to deal with certs...
       # REQUESTS_CA_BUNDLE: "/etc/ssl/certs/ca-certificates.crt"
       # NEW_RELIC_CA_BUNDLE_PATH: "/etc/ssl/certs/ca-certificates.crt"
