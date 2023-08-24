@@ -92,7 +92,7 @@ jobs:
         uses: zaproxy/action-api-scan@v0.4.0
         with:
           docker_name: "owasp/zap2docker-stable"
-          target: "http://localhost:6011/docs/openapi.yml"
+          target: "http://localhost:8080/docs/openapi.yml"
           fail_action: true
           allow_issue_writing: false
           rules_file_name: "zap.conf" # needs upgraded perms?
