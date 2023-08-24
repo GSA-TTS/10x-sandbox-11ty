@@ -1,7 +1,7 @@
 ---
 applications:
   - name: ((app_name))-((env)) # variables are inserted via cf push --vars-file ./deploy-config/staging.yml
-    buildpack: nodejs-buildpack
+    buildpack: nodejs_buildpack
     stack: cflinuxfs4
     instances: 1
     disk_quota: 1G
@@ -11,6 +11,7 @@ applications:
     # services:
     #   - ((10x_sandbox_redis_service))
     #   - ((10x_sandbox_postgres_service)) # needs to be created
+    #   - ((10x_sandbox_11ty_s3_bucket)) # needs to be created
 
     processes:
       - type: web
