@@ -1,0 +1,35 @@
+---
+applications:
+  - name: ((app_name))-((env)) # variables are inserted via cf push --vars-file ./deploy-config/staging.yml
+    buildpack: nodejs-buildpack
+    stack: cflinuxfs4
+    instances: 1
+    disk_quota: 1G
+    routes:
+      - route: ((app_name))-((env)).app.cloud.gov
+
+    # services:
+    #   - ((10x_sandbox_redis_service))
+    #   - ((10x_sandbox_postgres_service)) # needs to be created
+
+    processes:
+      - type: web
+        instances: ((web_instances))
+        memory: ((web_memory))
+        command: ./scripts/run_web.sh # this will override a procfile, you must have one or the other
+      # - type: worker
+      #   instances: ((worker_instances))
+      #   memory: ((worker_memory))
+      #   command: newrelic-admin run-program celery -A run_celery.notify_celery worker --loglevel=INFO --concurrency=4
+      # - type: scheduler
+      #   instances: 1
+      #   memory: ((scheduler_memory))
+      #   command: celery -A run_celery.notify_celery beat --loglevel=INFO
+
+    env:
+      SANDBOX_API_BASE_URL: ((sandbox_api_base_url))
+      MY_FIRST_ENV_VAR: ((MY_FIRST_ENV_VAR))
+
+      # eventually we'll need to deal with certs
+      # REQUESTS_CA_BUNDLE: "/etc/ssl/certs/ca-certificates.crt"
+      # NEW_RELIC_CA_BUNDLE_PATH: "/etc/ssl/certs/ca-certificates.crt"

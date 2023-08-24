@@ -1,0 +1,44 @@
+name: Node.js CI
+
+on:
+  workflow_run:
+    workflows: [Run checks]
+    types:
+      - completed
+    branches: [main] # Redundant, workflow_run events are only triggered on default branch (`main`)
+
+permissions:
+  contents: read
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    if: ${{ github.event.workflow_run.conclusion == 'success' }}
+
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          fetch-depth: 2
+
+      - name: Deploy to cloud.gov
+        uses: 18f/cg-deploy-action@main
+        env:
+          MY_ENV_VAR: ${{ secrets.MY_ENV_VAR }}
+          SANDBOX_API_BASE_URL: ((secrets.SANDBOX_API_BASE_URL))
+        with:
+          cf_username: ${{ secrets.CLOUDGOV_USERNAME }}
+          cf_password: ${{ secrets.CLOUDGOV_PASSWORD }}
+          cf_org: gsa-10x-prototyping
+          cf_space: jim.moffet
+          push_arguments: >-
+            --vars-file deploy-config/staging.yml
+            --var MY_ENV_VAR="$MY_ENV_VAR"
+            --var SANDBOX_API_BASE_URL="$SANDBOX_API_BASE_URL"
+
+  bail:
+    runs-on: ubuntu-latest
+    if: ${{ github.event.workflow_run.conclusion == 'failure' }}
+    steps:
+      - uses: actions/github-script@v6
+        with:
+          script: core.setFailed('Checks failed, not deploying')

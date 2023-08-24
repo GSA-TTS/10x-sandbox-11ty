@@ -1,0 +1,10 @@
+env: staging
+app_name: 10x-sandbox-11ty
+web_instances: 1
+web_memory: 1024M
+# worker_instances: 0
+# worker_memory: 512M
+# scheduler_memory: 256M
+sandbox_api_base_url: https://10x-sandbox-api.app.cloud.gov # call front-end api, can also use internal routes?
+10x_sandbox_redis_service: 10x-redis-sandbox
+MY_FIRST_ENV_VAR: some_string
