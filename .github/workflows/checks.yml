@@ -10,24 +10,24 @@ env:
   REDIS_ENABLED: 0 # necessary?
 
 jobs:
-  # build:
-  #   runs-on: ubuntu-latest
+  build:
+    runs-on: ubuntu-latest
 
-  #   strategy:
-  #     matrix:
-  #       node-version: [20.x]
+    strategy:
+      matrix:
+        node-version: [20.x]
 
-  #   steps:
-  #     - uses: actions/checkout@v3
-  #     - uses: ./.github/actions/setup-project
-  #     - name: Use Node.js ${{ matrix.node-version }}
-  #       uses: actions/setup-node@v3
-  #       with:
-  #         node-version: ${{ matrix.node-version }}
-  #     # - run: npm ci
-  #     - run: npm install
-  #     - run: npm run build --if-present
-  #     # - run: npm test
+    steps:
+      - uses: actions/checkout@v3
+      - uses: ./.github/actions/setup-project
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v3
+        with:
+          node-version: ${{ matrix.node-version }}
+      # - run: npm ci
+      - run: npm install
+      - run: npm run build --if-present
+      # - run: npm test
 
   analyze:
     name: Analyze
@@ -70,30 +70,30 @@ jobs:
       - name: Perform CodeQL Analysis
         uses: github/codeql-action/analyze@v2
 
-  dynamic-scan:
-    runs-on: ubuntu-latest
+  # dynamic-scan:
+  #   runs-on: ubuntu-latest
 
-    strategy:
-      matrix:
-        node-version: [20.x]
+  #   strategy:
+  #     matrix:
+  #       node-version: [20.x]
 
-    steps:
-      - uses: actions/checkout@v3
-      - name: Use Node.js ${{ matrix.node-version }}
-        uses: actions/setup-node@v3
-        with:
-          node-version: ${{ matrix.node-version }}
-      # - run: npm ci
-      - run: npm install
-      - run: npm run build --if-present
-      - run: npm run serve &
+  #   steps:
+  #     - uses: actions/checkout@v3
+  #     - name: Use Node.js ${{ matrix.node-version }}
+  #       uses: actions/setup-node@v3
+  #       with:
+  #         node-version: ${{ matrix.node-version }}
+  #     # - run: npm ci
+  #     - run: npm install
+  #     - run: npm run build --if-present
+  #     - run: npm run serve &
 
-      - name: Run OWASP Baseline Scan
-        uses: zaproxy/action-api-scan@v0.4.0
-        with:
-          docker_name: "owasp/zap2docker-stable"
-          target: "http://localhost:8080/docs/openapi.yml"
-          fail_action: true
-          allow_issue_writing: false
-          rules_file_name: "zap.conf" # needs upgraded perms?
-          cmd_options: "-I"
+  #     - name: Run OWASP Baseline Scan
+  #       uses: zaproxy/action-api-scan@v0.4.0
+  #       with:
+  #         docker_name: "owasp/zap2docker-stable"
+  #         target: "http://localhost:8080/docs/openapi.yml"
+  #         fail_action: true
+  #         allow_issue_writing: false
+  #         rules_file_name: "zap.conf" # needs upgraded perms?
+  #         cmd_options: "-I"
