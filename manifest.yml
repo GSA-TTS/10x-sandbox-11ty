@@ -11,12 +11,13 @@ applications:
     # services:
     #   - ((10x_sandbox_redis_service))
     #   - ((10x_sandbox_postgres_service)) # needs to be created
+    #   - ((10x_sandbox_11ty_s3_bucket)) # needs to be created
 
     processes:
       - type: web
         instances: ((web_instances))
         memory: ((web_memory))
-        command: ./scripts/run_web.sh # this will override a procfile, you must have one or the other
+        command: npm run start # could also use ./scripts/run_web.sh if you want to do more things at startup
       # - type: worker
       #   instances: ((worker_instances))
       #   memory: ((worker_memory))
@@ -30,6 +31,6 @@ applications:
       SANDBOX_API_BASE_URL: ((sandbox_api_base_url))
       MY_FIRST_ENV_VAR: ((MY_FIRST_ENV_VAR))
 
-      # eventually we'll need to deal with certs..
+      # eventually we'll need to deal with certs...
       # REQUESTS_CA_BUNDLE: "/etc/ssl/certs/ca-certificates.crt"
       # NEW_RELIC_CA_BUNDLE_PATH: "/etc/ssl/certs/ca-certificates.crt"

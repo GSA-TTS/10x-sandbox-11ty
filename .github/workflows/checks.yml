@@ -8,6 +8,8 @@ permissions:
 env:
   DEBUG: True # necessary?
   REDIS_ENABLED: 0 # necessary?
+  MY_ENV_VAR: ${{ secrets.MY_ENV_VAR }}
+  SANDBOX_API_BASE_URL: ${{ secrets.SANDBOX_API_BASE_URL }}
 
 jobs:
   build:
@@ -24,9 +26,8 @@ jobs:
         uses: actions/setup-node@v3
         with:
           node-version: ${{ matrix.node-version }}
-      # - run: npm ci
-      - run: npm install
-      - run: npm run build --if-present
+      - run: npm ci
+      - run: npm run build
       # - run: npm test
 
   analyze:
@@ -83,9 +84,8 @@ jobs:
   #       uses: actions/setup-node@v3
   #       with:
   #         node-version: ${{ matrix.node-version }}
-  #     # - run: npm ci
-  #     - run: npm install
-  #     - run: npm run build --if-present
+  #     - run: npm ci
+  #     - run: npm run build
   #     - run: npm run serve &
 
   #     - name: Run OWASP Baseline Scan
