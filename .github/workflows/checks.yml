@@ -21,7 +21,7 @@ jobs:
 
     steps:
       - uses: actions/checkout@v3
-      - uses: ./.github/actions/setup-project
+      # - uses: ./.github/actions/setup-project # can be used in case we need to align the github runner image with the cloud foundry image: cflinuxfs4
       - name: Use Node.js ${{ matrix.node-version }}
         uses: actions/setup-node@v3
         with:
