@@ -16,16 +16,15 @@ This project strives to be compliant with requirements set by [21st Century IDEA
 - is mobile-friendly.
 
 ## Key Functionality
-
 This repository contains the following examples and functionality:
 
-✅ Publish blog posts, press releases, announcements, etc. To modify this code, check out `blog/index.html`, which manages how the posts are listed. You should then check out `_includes/layouts/post.html` to see how individual posts are structured.
+✅  Publish blog posts, press releases, announcements, etc. To modify this code, check out `blog/index.html`, which manages how the posts are listed. You should then check out `_includes/layouts/post.html` to see how individual posts are structured.
 
 ✅ Publish single one-off pages. Instead of creating lots of folders throughout the root directory, you should put single pages in `pages` folder and change the `permalink` at the top of each page. Use sub-folders only when you really need to.
 
-✅ There are two different kinds of `pages`, one does not have a side bar navigation, and the other uses `_includes/sidenav.html`. You can enable this option by adding `sidenav: true` to your page front matter.
+✅  There are two different kinds of `pages`, one does not have a side bar navigation, and the other uses `_includes/sidenav.html`. You can enable this option by adding `sidenav: true` to your page front matter.
 
-```yml
+```
 ---
 title: Document with Sidenav
 layout: layout/page
@@ -36,8 +35,9 @@ permalink: /document-with-sidenav
 
 ✅ [Search.gov](https://search.gov) integration - Once you have registered and configured Search.gov for your site by following [these instructions](https://federalist.18f.gov/documentation/search/), add your "affiliate" and "access key" to `_data/site.yml`. Ex.
 
-```yml
+```
 searchgov:
+
   # You should not change this.
   endpoint: https://search.usa.gov
 
@@ -52,17 +52,15 @@ searchgov:
 ```
 
 The logic for using Search.gov can be found in `_includes/searchgov/form.html` and supports displaying the results inline or sending the user to Search.gov the view the results. This setting defaults to "inline" but can be changed by setting
-
-```yml
+```
 searchgov:
   inline: false
 ```
-
 in `_data/site.yml`.
 
 ✅ [Digital Analytics Program (DAP)](https://digital.gov/services/dap/) integration - Once you have registered your site with DAP add your "agency" and optionally, `subagency` to `_data/site.yml` and uncomment the appropriate lines. Ex.
 
-```yml
+```
 dap:
   # agency: your-agency
 
@@ -72,7 +70,7 @@ dap:
 
 ✅ [Google Analytics](https://analytics.google.com/analytics/web/) integration - If you have a Google Analytics account to use, add your "ua" to `_data/site.yml` and uncomment the appropriate lines. Ex.
 
-```yml
+```
 ga:
   # ua: your-ua
 ```
@@ -92,6 +90,8 @@ TODO
 TODO
 
 ## Netlify CMS
+
+
 
 ### Config
 
@@ -114,8 +114,8 @@ backend:
 You can run the Netlify CMS locally to more easily customize and troubleshoot the CMS to you content.
 We provide comments in the [`/admin/config.yml`](./admin/config.yml) instructing you how to change the `backend` values from your production site to the local development.
 
-> \*Note: Make sure to not commit and push the config with the `backend` set for local develop to Github or
-> else you will break your production site's Netlify CMS.
+> *Note: Make sure to not commit and push the config with the `backend` set for local develop to Github or
+else you will break your production site's Netlify CMS.
 
 ```yml
 # Local development backend
@@ -139,7 +139,7 @@ TODO
 
 ### Creating links
 
-For preview links generated on the platform, we automatically set the `pathPrefix` in the [`.eleventy.js`](/.eleventy.js) file base on the `BASEURL` environment variable. We use the built-in 11ty filter for `url` to properly append the prefix path for the linked page. When adding new links, use the following syntax:
+For preview links generated on the platform, we automatically set the `pathPrefix` in the [`.eleventy.js`](/.eleventy.js) file base on the `BASEURL` environment variable. We use the built-in 11ty filter for `url` to properly append the prefix path for the linked page.  When adding new links, use the following syntax:
 
 ```liquid
 <a href="{{ '/myDir/' | url }}">Link to My Dir</a>
