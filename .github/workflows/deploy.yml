@@ -15,10 +15,21 @@ jobs:
     runs-on: ubuntu-latest
     if: ${{ github.event.workflow_run.conclusion == 'success' }}
 
+    strategy:
+      matrix:
+        node-version: [20.x]
+
     steps:
       - uses: actions/checkout@v3
         with:
           fetch-depth: 2
+      - uses: ./.github/actions/setup-project
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v3
+        with:
+          node-version: ${{ matrix.node-version }}
+      - run: npm ci
+      - run: npm run build
 
       - name: Deploy to cloud.gov
         uses: 18f/cg-deploy-action@main

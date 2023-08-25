@@ -118,3 +118,5 @@ web_modules/
 
 # 11ty Related
 node_modules
+public
+_site
