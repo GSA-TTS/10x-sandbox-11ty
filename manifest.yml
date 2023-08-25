@@ -17,7 +17,7 @@ applications:
       - type: web
         instances: ((web_instances))
         memory: ((web_memory))
-        command: npm run start # could also use ./scripts/run_web.sh if you want to do more things at startup
+        command: npm run start
       # - type: worker
       #   instances: ((worker_instances))
       #   memory: ((worker_memory))
